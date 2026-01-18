@@ -8,10 +8,13 @@ import {
   Cog6ToothIcon
 } from '@heroicons/vue/24/outline'; // 注意这里改用了 outline 风格图标，更精致
 import { SparklesIcon as SparklesSolidIcon } from '@heroicons/vue/24/solid';
+import { useRouter } from 'vue-router';
 
+//初始化页面参数
 const text = ref('');
 const isAnalyzing = ref(false);
 const activeTab = ref('editor'); // 控制当前显示的是输入框还是导图
+const router=useRouter();
 
 // 模拟侧边栏历史记录数据
 const historyList = ref([
@@ -30,6 +33,11 @@ const handleGenerate = () => {
     alert('AI 分析完成！正在请求后端生成 JSON...');
   }, 1500);
 };
+
+const handleCreateNew= () =>{
+  console.log("创建新的思维导图")
+  router.push('/editor');
+}
 </script>
 
 <template>
@@ -42,7 +50,9 @@ const handleGenerate = () => {
       </div>
 
       <div class="p-4">
-        <button class="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 px-4 rounded-lg shadow-sm hover:shadow-md transition-all font-medium text-sm">
+        <button
+            @click="handleCreateNew"
+            class="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 px-4 rounded-lg shadow-sm hover:shadow-md transition-all font-medium text-sm">
           <PlusIcon class="w-5 h-5" />
           新建导图
         </button>
